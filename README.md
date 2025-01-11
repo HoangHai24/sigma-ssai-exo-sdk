@@ -189,4 +189,4 @@ By following the steps outlined above, you can successfully integrate and utiliz
 
 ## 9. References
 
-SSAITracking demo link: [Demo](https://repo.gviet.vn:1443/sigma-livestream/sigma-dai/sigma-dai-exo-ssai-plugin/-/tree/feature/sigma_player_2.19.1.13)
+SSAITracking demo link: [Demo](https://github.com/HoangHai24/sigma-ssai-exo-sdk/tree/feature/sigma-player_2.19.1.14)
