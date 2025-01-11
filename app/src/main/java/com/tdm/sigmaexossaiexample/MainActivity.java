@@ -4,15 +4,22 @@ package com.tdm.sigmaexossaiexample;
 import androidx.annotation.NonNull;
 import androidx.annotation.OptIn;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.media3.common.MediaItem;
-import androidx.media3.common.Metadata;
-import androidx.media3.common.PlaybackException;
-import androidx.media3.common.Player;
-import androidx.media3.common.util.UnstableApi;
-import androidx.media3.exoplayer.ExoPlayer;
-import androidx.media3.extractor.metadata.id3.Id3Frame;
-import androidx.media3.extractor.metadata.id3.TextInformationFrame;
-import androidx.media3.ui.PlayerView;
+import com.google.android.exoplayer2.C;
+import com.google.android.exoplayer2.DefaultLoadControl;
+import com.google.android.exoplayer2.ExoPlayer;
+import com.google.android.exoplayer2.Format;
+import com.google.android.exoplayer2.LoadControl;
+import com.google.android.exoplayer2.MediaItem;
+import com.google.android.exoplayer2.PlaybackException;
+import com.google.android.exoplayer2.Player;
+import com.google.android.exoplayer2.Tracks;
+import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.source.TrackGroup;
+import com.google.android.exoplayer2.source.ads.AdsLoader;
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.trackselection.TrackSelectionOverride;
+import com.google.android.exoplayer2.ui.PlayerView;
+import com.google.android.exoplayer2.util.MimeTypes;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -26,6 +33,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.sigma.drm.SigmaHelper;
 import com.tdm.adstracking.AdsTracking;
 import com.tdm.adstracking.FullLog;
 import com.tdm.adstracking.core.listener.ResponseInitListener;
@@ -35,11 +43,16 @@ public class MainActivity extends AppCompatActivity implements Player.Listener {
     private final String TAG = "MainActivity";
     ExoPlayer player;
     PlayerView playerView;
-    public String sourceUrl = "https://cdn-lrm-test.sigma.video/manifest/origin04/scte35-av4s-clear/master.m3u8?sigma.dai.adsEndpoint=91384082-452f-4d81-997a-21fdb08974a2";
+    public String sourceUrl = "https://cdn-lrm-test.sigma.video/manifest/origin04/scte35-av4s-sigma-drm/master.m3u8?sigma.dai.adsEndpoint=d7078543-b7b8-47d9-807c-b7429c05c81d";
     EditText editTextSource = null;
     Button reloadButton = null;
     private Context mainContext = null;
     Player.Listener playerListener = null;
+
+    private String DRM_MERCHANT_ID = "d5321abd-6676-4bc1-a39e-6bb763029e54";
+    private String DRM_SESSION_ID = "SESSION_ID";
+    private String DRM_USER_ID = "USER_ID";
+    private String DRM_APP_ID = "7444c496-67be-4998-8b29-82152668ba20";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +106,8 @@ public class MainActivity extends AppCompatActivity implements Player.Listener {
     }
 
     private void configPlayer(String url) {
+        SigmaHelper.instance().configure(DRM_MERCHANT_ID, DRM_APP_ID, DRM_USER_ID, DRM_SESSION_ID);
+
         player = new ExoPlayer.Builder(this).build();
         AdsTracking.getInstance().initPlayer(player);
         playerView.setPlayer(player);
@@ -108,12 +123,11 @@ public class MainActivity extends AppCompatActivity implements Player.Listener {
         playerListener = new Player.Listener() {
             @Override
             public void onPlaybackStateChanged(int playbackState) {
-                Log.d(TAG + "_onPlaybackStateChanged=>: ", String.valueOf(playbackState));
             }
 
             @Override
             public void onPlayerError(PlaybackException error) {
-                Log.e(TAG + "_onPlayerError=>: ", error.getMessage());
+                Log.e(TAG + "_onError=>:", error.getMessage());
                 ProgressDialogManager.getInstance().hideLoading();
             }
         };

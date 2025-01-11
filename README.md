@@ -1,6 +1,7 @@
-# SSAITracking SDK Integration Guide
 
- **Version** : 1.0.6
+# SSAITracking SDK Integration Guide For Sigma Player Android
+
+ **Version** : 1.0.2
 
 **Organization** : Thủ Đô Multimedia
 
@@ -52,6 +53,9 @@ allprojects {
         maven {
             url "https://maven.sigma.video"
         }
+    	maven {
+            url "https://maven.sigmadrm.com"
+        }
     }
 }
 ```
@@ -78,7 +82,7 @@ allprojects {
 ```swift
 dependencies {
     ...
-    implementation 'com.sigma.ssai:sigma-ssai-media3-cspm:1.0.6'
+    implementation 'com.sigma.ssai:sigma-ssai-sigma-player-cspm:1.0.2'
     ...
 }
 ```
@@ -185,4 +189,4 @@ By following the steps outlined above, you can successfully integrate and utiliz
 
 ## 9. References
 
-SSAITracking demo link: [Demo](https://github.com/sigmaott/sigma-ssai-exo-sdk)
+SSAITracking demo link: [Demo](https://repo.gviet.vn:1443/sigma-livestream/sigma-dai/sigma-dai-exo-ssai-plugin/-/tree/feature/sigma_player_2.19.1.13)

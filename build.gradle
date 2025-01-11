@@ -18,6 +18,9 @@ allprojects {
         maven {
             url "https://maven.sigma.video"
         }
+        maven {
+            url "https://maven.sigmadrm.com"
+        }
     }
 }
 
