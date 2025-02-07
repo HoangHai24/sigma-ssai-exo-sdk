@@ -57,6 +57,6 @@ dependencies {
     implementation 'com.sigma.drm:sigma-player-ui:2.19.1.14'
 
 //    implementation 'com.sigma.ssai:sigma-ssai-media3-cspm:1.0.5'
-    implementation 'com.sigma.ssai:sigma-ssai-sigma-player-cspm:1.0.2'
+    implementation 'com.sigma.ssai:sigma-ssai-sigma-player-cspm:1.0.9'
 
 }

@@ -1,7 +1,6 @@
-
 # SSAITracking SDK Integration Guide For Sigma Player Android
 
- **Version** : 1.0.2
+ **Version** : 1.0.9
 
 **Organization** : Thủ Đô Multimedia
 
@@ -82,7 +81,7 @@ allprojects {
 ```swift
 dependencies {
     ...
-    implementation 'com.sigma.ssai:sigma-ssai-sigma-player-cspm:1.0.2'
+    implementation 'com.sigma.ssai:sigma-ssai-sigma-player-cspm:1.0.9'
     ...
 }
 ```
