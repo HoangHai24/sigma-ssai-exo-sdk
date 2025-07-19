@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements Player.Listener {
     private final String TAG = "MainActivity=>>";
     ExoPlayer player;
     PlayerView playerView;
-    public String sourceUrl = "https://cdn-lrm-test.sigma.video/manifest/origin04/scte35-av4s-clear/master.m3u8?sigma.dai.adsEndpoint=d7078543-b7b8-47d9-807c-b7429c05c81d";
+    public String sourceUrl = "https://stream-cdn.sigmadrm.com/manifest/channel-test/masterhls-ts-4s.m3u8";
     EditText editTextSource = null;
     Button reloadButton = null;
     private Context mainContext = null;
