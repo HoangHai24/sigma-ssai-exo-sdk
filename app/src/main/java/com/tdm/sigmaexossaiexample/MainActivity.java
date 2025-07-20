@@ -28,8 +28,12 @@ import android.widget.Toast;
 
 import com.tdm.adstracking.AdsTracking;
 import com.tdm.adstracking.FullLog;
+import com.tdm.adstracking.core.SigmaError;
 import com.tdm.adstracking.core.listener.ResponseInitListener;
 import com.tdm.adstracking.define.LogLevel;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity implements Player.Listener {
     private final String TAG = "MainActivity=>>";
@@ -37,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements Player.Listener {
     PlayerView playerView;
     public String sourceUrl = "https://stream-cdn.sigmadrm.com/manifest/channel-test/masterhls-ts-4s.m3u8";
     EditText editTextSource = null;
+    EditText editTextAdsEndpoint = null;
     Button reloadButton = null;
     private Context mainContext = null;
     Player.Listener playerListener = null;
@@ -51,9 +56,11 @@ public class MainActivity extends AppCompatActivity implements Player.Listener {
         setContentView(R.layout.activity_main);
         playerView = findViewById(R.id.player_view_id);
         editTextSource = findViewById(R.id.source_hls);
+        editTextAdsEndpoint = findViewById(R.id.ads_endpoint);
         reloadButton = findViewById(R.id.reload_player);
 
         editTextSource.setText(sourceUrl);
+        editTextAdsEndpoint.setText("da914c58-5c6e-41b7-93b7-0597c4a983ee");
 
         // Initialize the ProgressDialogManager to fake loading
         ProgressDialogManager.getInstance().init(this);
@@ -67,12 +74,26 @@ public class MainActivity extends AppCompatActivity implements Player.Listener {
         playerView.post(new Runnable() {
             @Override
             public void run() {
-                initAdsTracking();
+                try {
+                    initAdsTracking();
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
     }
 
-    private void initAdsTracking() {
+    private void initAdsTracking() throws JSONException {
+        String adsEndpoint = editTextAdsEndpoint.getText().toString().trim();
+        
+        // Set ads endpoint
+        AdsTracking.getInstance().setAdsEndpoint(this.sourceUrl, adsEndpoint);
+
+        //if you want to set custom data
+        JSONObject customData = new JSONObject();
+        customData.put("custom_key", "custom_value");
+        AdsTracking.getInstance().setCustomData(this.sourceUrl, customData.toString());
+        
         AdsTracking.getInstance().init(
                 this,
                 playerView,
@@ -85,8 +106,8 @@ public class MainActivity extends AppCompatActivity implements Player.Listener {
                     }
 
                     @Override
-                    public void onInitFailed(String url, String msg) {
-                        Toast.makeText(mainContext, msg, Toast.LENGTH_SHORT).show();
+                    public void onInitFailed(String url, SigmaError sigmaError) {
+                        Toast.makeText(mainContext, sigmaError.getDescription(), Toast.LENGTH_SHORT).show();
                         ProgressDialogManager.getInstance().hideLoading();
                     }
                 });
@@ -131,7 +152,11 @@ public class MainActivity extends AppCompatActivity implements Player.Listener {
 
         //time out to fake load content
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            initAdsTracking();
+            try {
+                initAdsTracking();
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
         }, 1000);
     }
 
