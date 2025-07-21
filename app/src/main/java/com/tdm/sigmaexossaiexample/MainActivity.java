@@ -27,7 +27,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.tdm.adstracking.AdsTracking;
-import com.tdm.adstracking.FullLog;
 import com.tdm.adstracking.core.SigmaError;
 import com.tdm.adstracking.core.listener.ResponseInitListener;
 import com.tdm.adstracking.define.LogLevel;
@@ -39,7 +38,9 @@ public class MainActivity extends AppCompatActivity implements Player.Listener {
     private final String TAG = "MainActivity=>>";
     ExoPlayer player;
     PlayerView playerView;
-    public String sourceUrl = "https://stream-cdn.sigmadrm.com/manifest/channel-test/masterhls-ts-4s.m3u8";
+//    public String sourceUrl = "https://stream-cdn.sigmadrm.com/manifest/channel-test/masterhls-ts-4s.m3u8";
+    public String sourceUrl = "https://stream-cdn.sigmadrm.com/manifest/channel-test/masterdash-ts-4s.mpd";
+
     EditText editTextSource = null;
     EditText editTextAdsEndpoint = null;
     Button reloadButton = null;
@@ -93,7 +94,9 @@ public class MainActivity extends AppCompatActivity implements Player.Listener {
         JSONObject customData = new JSONObject();
         customData.put("custom_key", "custom_value");
         AdsTracking.getInstance().setCustomData(this.sourceUrl, customData.toString());
-        
+
+
+
         AdsTracking.getInstance().init(
                 this,
                 playerView,
