@@ -17,7 +17,7 @@
    - [Prepare and Play the Media Source](#63-prepare-and-play-the-media-source)
    - [Clean Up Resources](#64-clean-up-resources)
    - [Api support](#65-api-support)
-7. [Important Notes](#8-important-notes)
+7. [Important Notes](#7-important-notes)
 8. [Conclusion](#8-conclusion)
 9. [References](#9-references)
 
@@ -176,7 +176,7 @@ protected void onDestroy() {
 }
 ```
 
-### 6.5 Api-support
+### 6.5 Api Support
 
 * public void setManifestTimeout(int manifestTimeout)
 Description:
@@ -219,10 +219,9 @@ Whether to use nonce for google ads manager or not
 Parameters:
 `useNonce`: boolean options, default false
 
-
 ## 7. Important Notes
 
-Always remember to call `setPlayer()` on the SDK after initializing the ExoPlayer or replacing the current item. This ensures that the SDK correctly recognizes the active video player and can effectively manage ad tracking. This ensures that the new endpoint and new params is properly configured and used for tracking.
+Always remember to call `setPlayer()` on the SDK after initializing the ExoPlayer or replacing the current item. This ensures that the SDK correctly recognizes the active video player and can effectively manage ad tracking.
 
 ## 8. Conclusion
 

@@ -45,23 +45,19 @@
                         android:id="@+id/label_source_hls"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="📺 Source HLS"
+                        android:text="📺 Source Stream"
                         android:textColor="#FFFFFF"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:layout_marginBottom="4dp" />
 
-                    <EditText
+                    <Spinner
                         android:id="@+id/source_hls"
                         android:layout_width="match_parent"
-                        android:layout_height="36dp"
-                        android:hint="Enter source HLS URL"
-                        android:inputType="text"
-                        android:background="@drawable/edit_text_background"
-                        android:textColor="#000000"
-                        android:textSize="14sp"
-                        android:paddingHorizontal="12dp"
-                        android:paddingVertical="4dp" />
+                        android:layout_height="40dp"
+                        android:background="@drawable/spinner_background"
+                        android:popupBackground="#FFFFFF"
+                        android:paddingHorizontal="12dp" />
 
                 </LinearLayout>
 
